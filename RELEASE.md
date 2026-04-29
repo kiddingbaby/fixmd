@@ -7,11 +7,12 @@ Use this checklist before publishing `fixmd`.
 1. `make check`
 2. `bash scripts/fixmd.sh --help`
 3. `bash scripts/fixmd.sh --target "$(pwd)" --json`
-4. Verify default zero-write behavior against a clean sample repo (no auto-created `.markdownlint.jsonc`).
-5. `bash scripts/fixmd.sh --target "$(pwd)" --install-config`
-6. `bash -n scripts/fixmd.sh`
-7. Confirm `SKILL.md` frontmatter is valid and paths are correct.
-8. Confirm `contracts/result.schema.json` matches current script output.
+4. `python3 tests/validate_contract.py`
+5. Verify default zero-write behavior against a clean sample repo (no auto-created `.markdownlint.jsonc`).
+6. `bash scripts/fixmd.sh --target "$(pwd)" --install-config`
+7. `bash -n scripts/fixmd.sh`
+8. Confirm `SKILL.md` frontmatter is valid and paths are correct.
+9. Confirm `contracts/result.schema.json` matches current script output.
 
 ## Versioning
 

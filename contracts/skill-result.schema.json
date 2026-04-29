@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/fixmd/schemas/skill-result.schema.json",
+  "$id": "https://raw.githubusercontent.com/kiddingbaby/fixmd/main/contracts/skill-result.schema.json",
   "title": "Skill Result Envelope",
   "type": "object",
   "additionalProperties": false,

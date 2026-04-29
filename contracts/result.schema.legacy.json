@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/fixmd/contracts/result.schema.legacy.json",
+  "$id": "https://raw.githubusercontent.com/kiddingbaby/fixmd/main/contracts/result.schema.legacy.json",
   "title": "fixmd Result",
   "allOf": [
     {

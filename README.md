@@ -120,6 +120,7 @@ Or run the commands directly:
 ```bash
 bash -n scripts/fixmd.sh
 bash tests/smoke.sh
+python3 tests/validate_contract.py
 ```
 
 ## Release Checklist

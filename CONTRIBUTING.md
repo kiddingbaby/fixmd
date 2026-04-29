@@ -24,6 +24,7 @@ bash scripts/fixmd.sh --target "$(pwd)" --json
 bash scripts/fixmd.sh --target "$(pwd)" --install-config
 bash -n scripts/fixmd.sh
 bash tests/smoke.sh
+python3 tests/validate_contract.py
 ```
 
 If behavior or contract changes:
