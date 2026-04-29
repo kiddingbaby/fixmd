@@ -1,0 +1,7 @@
+tmp/
+*.tmp
+*.out
+*.err
+*.log
+coverage/
+.DS_Store

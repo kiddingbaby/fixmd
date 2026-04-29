@@ -1,0 +1,9 @@
+name: fixmd
+description: Script-first Markdown quality check and auto-fix tool. Auto-fixes first, re-checks immediately, and uses a temporary built-in baseline when the target repo has no markdownlint config.
+display_name: fixmd
+short_description: Script-first Markdown lint/fix tool with zero-write default config behavior.
+default_prompt: Use fixmd to auto-fix and re-check Markdown issues in a target repository.
+allowed_tools:
+- bash
+entrypoint: scripts/fixmd.sh
+output_contract: contracts/result.schema.json

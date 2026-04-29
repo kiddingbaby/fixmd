@@ -1,0 +1,28 @@
+schema_version: skill-manifest/v2
+name: fixmd
+version: 1.1.0
+description: Script-first Markdown quality check and auto-fix tool. Auto-fixes first, re-checks immediately, and uses a temporary built-in baseline when the target repo has no markdownlint config.
+display_name: fixmd
+short_description: Script-first Markdown lint/fix tool with zero-write default config behavior.
+default_prompt: Use fixmd to auto-fix and re-check Markdown issues in a target repository.
+trigger_when: user asks to lint, fix, or validate Markdown files in a repository
+entrypoint: scripts/fixmd.sh
+output_contract: contracts/result.schema.json
+allowed_tools:
+- bash
+runtime:
+  shell: bash
+  timeout_seconds: 30
+  smoke:
+    help_args:
+    - --help
+    json_args:
+    - --target
+    - .
+    - --json
+    expected_exit_codes:
+    - 0
+    - 1
+    - 4
+capabilities:
+- deterministic-workflow

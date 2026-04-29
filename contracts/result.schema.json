@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/fixmd/contracts/result.schema.json",
+  "title": "fixmd Result",
+  "allOf": [
+    {
+      "$ref": "./skill-result.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "fixmd"
+        },
+        "schema_version": {
+          "const": "fixmd/v1"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "config": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "enum": [
+                    "existing",
+                    "temporary",
+                    "installed"
+                  ]
+                },
+                "kind": {
+                  "enum": [
+                    "markdownlint",
+                    "markdownlint-cli2",
+                    "package-json",
+                    "legacy-rc",
+                    "fallback"
+                  ]
+                }
+              },
+              "required": [
+                "source",
+                "kind"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "tool",
+        "schema_version",
+        "data"
+      ]
+    }
+  ]
+}

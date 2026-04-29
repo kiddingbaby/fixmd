@@ -1,0 +1,49 @@
+{
+  // fixmd reusable markdownlint baseline (agent readability first).
+  // Strategy:
+  // - Enable all rules by default.
+  // - Override only rules with high false-positive/noise risk in multi-repo docs.
+  "default": true,
+
+  // Long lines are common in links/frontmatter/spec docs; keep readability guardrails
+  // without forcing aggressive hard wraps.
+  "MD013": {
+    "line_length": 160,
+    "headings": false,
+    "code_blocks": false,
+    "tables": false
+  },
+
+  // Avoid duplicate-heading false positives across different sections.
+  "MD024": {
+    "siblings_only": true
+  },
+
+  // Keep one title rule while supporting frontmatter title conventions.
+  "MD025": {
+    "level": 1,
+    "front_matter_title": "^\\s*title\\s*[:=]"
+  },
+
+  // Ordered lists in docs are easier to parse with explicit progression.
+  "MD029": {
+    "style": "ordered"
+  },
+
+  // Inline HTML is common in docs platforms and badges; keep it allowed by default.
+  "MD033": false,
+
+  // Require language tags for fenced code blocks to improve agent parsing.
+  "MD040": true,
+
+  // Frontmatter-heavy repos often do not use H1 as first rendered line.
+  "MD041": false,
+
+  // Normalize code fence style for stable diffs.
+  "MD046": {
+    "style": "fenced"
+  },
+  "MD048": {
+    "style": "backtick"
+  }
+}

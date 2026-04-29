@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/fixmd/contracts/result.schema.legacy.json",
+  "title": "fixmd Result",
+  "allOf": [
+    {
+      "$ref": "./skill-result.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "const": "fixmd"
+        },
+        "schema_version": {
+          "const": "fixmd/v1"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "tool",
+        "schema_version",
+        "data"
+      ]
+    }
+  ]
+}

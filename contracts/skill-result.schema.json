@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/fixmd/schemas/skill-result.schema.json",
+  "title": "Skill Result Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tool", "status", "data"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+/v[0-9]+$"
+    },
+    "tool": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ok", "error"]
+    },
+    "data": {
+      "type": "object"
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "hints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 400
+      }
+    },
+    "error": {
+      "type": ["object", "string", "null"],
+      "additionalProperties": true
+    }
+  }
+}
