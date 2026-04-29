@@ -18,11 +18,27 @@ This repository is standalone. It can be used directly as a shell tool, or packa
 Clone the repository anywhere:
 
 ```bash
-git clone <your-repo-url> fixmd
+git clone https://github.com/kiddingbaby/fixmd.git
 cd fixmd
 ```
 
 No runtime bootstrap is required beyond local markdownlint tooling.
+
+## Usage Modes
+
+`fixmd` supports two common ways of being used:
+
+1. Standalone tool
+
+Run the shell entrypoint directly against any repository:
+
+```bash
+bash scripts/fixmd.sh --target /path/to/repo --json
+```
+
+2. Embedded skill or plugin dependency
+
+Another skill system can vendor or reference this repository and expose `scripts/fixmd.sh` as an internal Markdown lint/fix capability. In that setup, `fixmd` remains script-first and keeps the same output contract.
 
 ## Prerequisites
 

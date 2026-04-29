@@ -8,6 +8,7 @@ All notable changes to `fixmd` are documented in this file.
 
 - GitHub Actions CI that installs `markdownlint-cli2` and runs `make check` on pushes and pull requests.
 - Expanded smoke coverage for zero-write temporary config, `--install-config`, and existing-config preservation flows.
+- README now documents the public GitHub clone URL and distinguishes standalone-tool usage from embedded skill usage.
 
 ## [1.1.0] - 2026-03-08
 
