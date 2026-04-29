@@ -1,5 +1,7 @@
 # fixmd
 
+[![CI](https://github.com/kiddingbaby/fixmd/actions/workflows/ci.yml/badge.svg)](https://github.com/kiddingbaby/fixmd/actions/workflows/ci.yml)
+
 Script-first Markdown lint/fix tool built around `markdownlint-cli2` or `markdownlint`.
 
 Default behavior:
