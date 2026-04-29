@@ -4,6 +4,10 @@ All notable changes to `fixmd` are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- GitHub Actions CI that installs `markdownlint-cli2` and runs `make check` on pushes and pull requests.
+
 ## [1.1.0] - 2026-03-08
 
 ### Changed
