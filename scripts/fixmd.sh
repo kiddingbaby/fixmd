@@ -69,23 +69,24 @@ add_hint() {
 
 append_markdownlint_failures() {
     local raw="$1"
-    local parsed line files
-    parsed="$(printf '%s\n' "$raw" | awk '
+    local line files
+    local -a parsed_lines=()
+
+    mapfile -t parsed_lines < <(awk '
         /:[0-9]+(:[0-9]+)?[[:space:]]+error[[:space:]]+MD[0-9]+\/[^[:space:]]+/ {
             print
             count++
             if (count >= 5) {
-                exit
+                exit 0
             }
         }
-    ')"
+    ' <<<"$raw")
 
-    if [[ -n "$parsed" ]]; then
-        while IFS= read -r line; do
-            [[ -n "$line" ]] || continue
+    if [[ "${#parsed_lines[@]}" -gt 0 ]]; then
+        for line in "${parsed_lines[@]}"; do
             failures+=("markdownlint: $line")
-        done <<<"$parsed"
-        files="$(printf '%s\n' "$parsed" | awk '
+        done
+        files="$(printf '%s\n' "${parsed_lines[@]}" | awk '
             {
                 if (match($0, /:[0-9]+(:[0-9]+)?[[:space:]]+error[[:space:]]+MD[0-9]+\//)) {
                     print substr($0, 1, RSTART - 1)

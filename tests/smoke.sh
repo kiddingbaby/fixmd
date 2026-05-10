@@ -36,6 +36,17 @@ check_contains() {
   fi
 }
 
+check_not_contains() {
+  local haystack="$1"
+  local needle="$2"
+  local label="$3"
+  if contains "$haystack" "$needle"; then
+    check "$label" 1
+  else
+    check "$label" 0
+  fi
+}
+
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 
@@ -136,6 +147,41 @@ if [[ "$before_existing_config" == "$after_existing_config" ]]; then
   check "existing config content unchanged" 0
 else
   check "existing config content unchanged" 1
+fi
+
+if command -v markdownlint-cli2 >/dev/null 2>&1 || command -v markdownlint >/dev/null 2>&1; then
+  broken_pipe_repo="$tmpdir/broken-pipe-repro"
+  mkdir -p "$broken_pipe_repo"
+  python3 - <<'PY' "$broken_pipe_repo/bad.md"
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+with path.open("w", encoding="utf-8") as handle:
+    for index in range(2000):
+        handle.write("# " + ("x" * 300) + f" {index}\n")
+PY
+
+  set +e
+  broken_pipe_out="$("$entry" --target "$broken_pipe_repo" --json 2>&1)"
+  broken_pipe_rc=$?
+  set -e
+
+  if [[ "$broken_pipe_rc" == "1" ]]; then
+    check "large markdownlint failure returns check_failed" 0
+  else
+    check "large markdownlint failure returns check_failed" 1
+  fi
+  check_not_contains "$broken_pipe_out" "Broken pipe" "large markdownlint failure avoids broken pipe"
+  check_contains "$broken_pipe_out" '"status": "error"' "large markdownlint failure keeps json status"
+  check_contains "$broken_pipe_out" '"code":"check_failed"' "large markdownlint failure keeps error code"
+  check_contains "$broken_pipe_out" 'markdownlint: bad.md:' "large markdownlint failure includes parsed failures"
+
+  if printf '%s' "$broken_pipe_out" | python3 -c 'import json,sys; json.load(sys.stdin)' >/dev/null 2>&1; then
+    check "large markdownlint failure emits valid json" 0
+  else
+    check "large markdownlint failure emits valid json" 1
+  fi
 fi
 
 if [[ "$fail" -gt 0 ]]; then
